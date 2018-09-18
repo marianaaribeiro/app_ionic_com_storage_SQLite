@@ -144,11 +144,11 @@ export class HomePage {
     this.Post = false;
     this.apresentacao = false;
     this.menu = false;
-    this.menu1 = false;
+    this.menu1 = true;
     this.toolbar1 = false;
-    this.menu2 = false;
+    this.menu2 = true;
     this.menu3 = true;
-    this.menu4 = true;
+    this.menu4 = false;
   }
   cancelarEditacaoFeed(){
       this.feed = {titulo:'', atores:'', descricao:'', imagemPost:''};
@@ -203,7 +203,8 @@ export class HomePage {
       allowEdit: true,
       targetHeight: 100,
       targetWidth: 100,
-
+      cameraDirection : 1 && 0, // 0 BACK, 1 FRONT
+      
     }
     this.camera.getPicture(options).then((imageData) => {
       let base64Image = 'data:image/jpeg;base64,' + imageData;
@@ -232,16 +233,16 @@ export class HomePage {
     title: "Conheça o BlogLife",
     description: "Com esse <b class='estiloSlide2'>Aplicativo</b> é possível salvar suas melhores postagens e tirar fotos com auto padrão de qualidade.",
     image: "assets/imgs/blog2.jpg",
-  },
+  }, 
   { 
     title: "Como funciona?", 
     description: "Para <b class='estiloSlide2'>cadastrar uma postagem</b> é preciso clicar no menu, um botão no canto superior á direita.",
-    image: "assets/imgs/20180119_113202.jpg",
+    image: "assets/imgs/6.jpg",
   },
   {
     title: "Como faço para apagar um post?",
     description: "Para <b>deletar uma postagem</b> é preciso clicar no botão editar para habilitar a função remover.",
-    image: "assets/imgs/20171031_131231.jpg",
+    image: "assets/imgs/6.jpg",
   }
 ];
 verificando(){

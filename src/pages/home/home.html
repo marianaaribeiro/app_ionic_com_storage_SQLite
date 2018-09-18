@@ -3,7 +3,7 @@
       <ion-title>
         <h1 *ngIf="apresentacao"> Bem vindo!
             <ion-toolbar *ngIf="toolbar1 && apresentacao">
-                <ion-buttons end *ngIf="toolbar1">
+                <ion-buttons end *ngIf="toolbar1 && apresentacao">
                   <button ion-button color="light" *ngIf="toolbar1" (click)="verificando()" >Pular</button>
                 </ion-buttons>
             </ion-toolbar>
@@ -17,14 +17,6 @@
   </ion-header>
   
   <ion-content >
-      <ion-refresher (ionRefresh)="doRefresh($event)">
-          <ion-refresher-content
-            pullingIcon="arrow-dropdown"
-            pullingText="Atualizando..."
-            refreshingSpinner="circles"
-            refreshingText="Atualizando...">
-          </ion-refresher-content>
-      </ion-refresher>    
     <!--inputs-->
       <!--Cadastro-->
       <ion-content class="inputsfeed" *ngIf="!cadastrar" >
@@ -43,6 +35,9 @@
         <div text-center>     
         <button *ngIf="!editandofeed" ion-button  class="btn1" color="dark" round (click)="gocamera('picture')">Camera</button>
         <button *ngIf="!editandofeed" ion-button  class="btn1" color="dark" round (click)="gocamera('gallery')">Galeria</button>
+        <ion-item *ngIf="!editandofeed" class="imagem3">
+            <img [src]="feed.imagemPost" class="slide-image2"/>
+        </ion-item>
         <button *ngIf="!editandofeed" ion-button block color="dark" round (click)="adicionarFeed()">Adicionar</button>
         <button *ngIf="editandofeed" ion-button  class="btn1" color="dark" round (click)="atualizarFeed()">Atualizar</button>
         <button *ngIf="editandofeed" ion-button  class="btn1" color="dark" round (click)="cancelarEditacaoFeed()">Cancelar</button>
@@ -52,7 +47,7 @@
       <ion-fab top right edge *ngIf="!menu" >
           <button ion-fab mini color="light" *ngIf="!menu1"><ion-icon name="home"></ion-icon></button>
           <button ion-fab mini color="primary" *ngIf="!menu4" (click)="goEditarPost(feed)" ><ion-icon name="create" ></ion-icon></button>
-          <ion-fab-list>
+          <ion-fab-list top right edge>
             <button ion-fab color="dark" (click)="novoPost()" *ngIf="!menu2"><ion-icon name="add"></ion-icon></button>
             <button ion-fab color="dark" (click)="goExibirPost(feed)" *ngIf="!menu3"><ion-icon name="paper"></ion-icon></button>
             <button ion-fab color="dark" (click)="goEditarPost(feed)" *ngIf="!menu4"><ion-icon name="create"></ion-icon></button>
@@ -62,10 +57,18 @@
       <!--conteúdo-->
         <!--Post--> 
       <ion-content  *ngIf="!Post">
+          <ion-refresher (ionRefresh)="doRefresh($event)">
+              <ion-refresher-content
+                pullingIcon="arrow-dropdown"
+                pullingText="Atualizando..."
+                refreshingSpinner="circles"
+                refreshingText="Atualizando...">
+              </ion-refresher-content>
+          </ion-refresher>    
         <ion-card *ngFor="let feed of feeds" > 
             <ion-item>
                 <ion-avatar item-start>
-                  <img src="../../assets/imgs/20171031_131231.jpg">
+                  <img src="../../assets/imgs/6.jpg">
                   
                 </ion-avatar>
                 <h2>{{feed.titulo}}</h2>
@@ -73,7 +76,7 @@
             </ion-item>         
             <ion-card-header class="barratitulo" (click)="goPost()" text-center>
               <ion-item class="slide-image2">
-                  <img [src]="feed.imagemPost" class="slide-image2"/>
+                  <img [src]="feed.imagemPost" class="imagem4"/>
               </ion-item>
              <h2 class="estiloSlide1"> {{feed.descricao}} </h2>
             </ion-card-header>
