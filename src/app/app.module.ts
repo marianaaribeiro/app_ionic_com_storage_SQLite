@@ -4,20 +4,23 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { IonicStorageModule } from '@ionic/storage';
 import { HttpClientModule } from '@angular/common/http';
 import { Camera } from '@ionic-native/camera';
-
-import { MyApp } from './app.component';
-import { HomePage } from '../pages/home/home';
-import { ListPage } from '../pages/list/list';
+import { GoogleMaps } from '@ionic-native/google-maps';
+import { Geolocation } from '@ionic-native/geolocation';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { FeedsProvider } from '../providers/feeds/feeds';
+import { MyApp } from './app.component';
+import { HomePage } from '../pages/home/home';
+import { ListPage } from '../pages/list/list';
+import { MapaPage } from '../pages/mapa/mapa';
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
-    ListPage
+    ListPage,
+    MapaPage
   ],
   imports: [
     BrowserModule,
@@ -32,7 +35,8 @@ import { FeedsProvider } from '../providers/feeds/feeds';
   entryComponents: [
     MyApp,
     HomePage,
-    ListPage
+    ListPage,
+    MapaPage
   ],
   providers: [
     StatusBar,
@@ -41,6 +45,8 @@ import { FeedsProvider } from '../providers/feeds/feeds';
     HttpClientModule,
     Camera,
     FeedsProvider,
+    GoogleMaps,
+    Geolocation,
   ]
 })
 export class AppModule {}

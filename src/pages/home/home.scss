@@ -1,6 +1,6 @@
 page-home {
     .barraFeed{
-        background: rgb(3, 3, 3);
+        background: rgba(30, 206, 44, 0.678);
         height: 43px;
         align-items: center;
         color: azure;
@@ -26,16 +26,6 @@ page-home {
     }
     ion-content{
         background-color: rgba(179, 228, 214, 0.507);
-    }
-    .imagem3{
-        margin: 18px 0;
-        border-radius: 15px;
-    }
-    .imagem4{
-        max-height: 100%;
-        max-width: 100%;
-        margin: 18px 0;
-        border-radius: 15px;
     }
 
     .toolbar-background {
@@ -63,20 +53,30 @@ page-home {
         border-bottom-left-radius: 15px;
         border-bottom-right-radius: 15px;
       }
+      .image2{
+        height: 100%;
+        width: 100%;
+        border-radius: 10px;
+      }
     
       .estiloSlide2 {
         font-weight: 500;
         color: #000000;
-      }  
+      }
+      
     
       .estiloSlide1 {
         padding: 0 40px;
         font-size: 14px;
         line-height: 1.5;
         color: #60646B;  
+        
       }
       .inputsSlide{
         position: fixed; 
         margin: 10px;
+    }
+    .cards{
+        margin-top: 40px;
     }
 }

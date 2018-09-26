@@ -1,22 +1,38 @@
 <ion-header>
     <ion-navbar color="dark">
       <ion-title>
-        <h1 *ngIf="apresentacao"> Bem vindo!
-            <ion-toolbar *ngIf="toolbar1 && apresentacao">
-                <ion-buttons end *ngIf="toolbar1 && apresentacao">
-                  <button ion-button color="light" *ngIf="toolbar1" (click)="verificando()" >Pular</button>
-                </ion-buttons>
-            </ion-toolbar>
+        <h1 *ngIf="apresentacao"> Bem vindo!            
+                <ion-buttons end *ngIf="toolbar1" color="secondary">
+                  <button end ion-button color="light" *ngIf="toolbar1" (click)="verificando()" >Pular</button>
+                </ion-buttons>            
         </h1>
         <h1 *ngIf="!Post">Blog Life </h1>
         <h1 *ngIf="!cadastrar">Cadastrar Post</h1>
         <h1 *ngIf="!editar">Editar Post</h1>
       </ion-title>
     </ion-navbar>
+    <ion-fab bottom right edge *ngIf="!menu" >
+        <button ion-fab mini color="light" *ngIf="!menu1"><ion-icon name="home"></ion-icon></button>
+        <ion-fab-list>
+          <button ion-fab color="dark" (click)="novoPost()" *ngIf="!menu2"><ion-icon name="add"></ion-icon></button>
+          <button ion-fab color="dark" (click)="goMapa()" *ngIf="!menu2"><ion-icon name="map"></ion-icon></button>
+          <button ion-fab color="dark" (click)="goExibirPost(feed)" *ngIf="!menu3"><ion-icon name="paper"></ion-icon></button>
+        </ion-fab-list>
+      </ion-fab>
     
   </ion-header>
   
   <ion-content >
+     <!--menu-->
+    <!--fim menu-->
+      <ion-refresher (ionRefresh)="doRefresh($event)">
+          <ion-refresher-content
+            pullingIcon="arrow-dropdown"
+            pullingText="Atualizando..."
+            refreshingSpinner="circles"
+            refreshingText="Atualizando..." style="background-color: transparent">
+          </ion-refresher-content>
+      </ion-refresher>    
     <!--inputs-->
       <!--Cadastro-->
       <ion-content class="inputsfeed" *ngIf="!cadastrar" >
@@ -28,57 +44,38 @@
               <ion-input type="text" color="dark" [(ngModel)]="feed.atores" placeholder="Autor"></ion-input>
           </ion-item>
           <ion-item>
-              <ion-input type="text" color="dark" [(ngModel)]="feed.descricao" placeholder="Descrição"></ion-input>
+              <ion-input type="text" color="dark" [(ngModel)]="feed.descricao" placeholder="Descrição" style="height: 30px;"></ion-input>
           </ion-item>
-    
         </ion-list>
         <div text-center>     
         <button *ngIf="!editandofeed" ion-button  class="btn1" color="dark" round (click)="gocamera('picture')">Camera</button>
         <button *ngIf="!editandofeed" ion-button  class="btn1" color="dark" round (click)="gocamera('gallery')">Galeria</button>
-        <ion-item *ngIf="!editandofeed" class="imagem3">
-            <img [src]="feed.imagemPost" class="slide-image2"/>
+        <ion-item *ngFor="let feed of feeds">
+            <img [src]="feed.imagemPost" class="image2" style="margin-bottom: 10px;"/>
         </ion-item>
         <button *ngIf="!editandofeed" ion-button block color="dark" round (click)="adicionarFeed()">Adicionar</button>
         <button *ngIf="editandofeed" ion-button  class="btn1" color="dark" round (click)="atualizarFeed()">Atualizar</button>
         <button *ngIf="editandofeed" ion-button  class="btn1" color="dark" round (click)="cancelarEditacaoFeed()">Cancelar</button>
         </div>
       </ion-content>
-      <!--menu-->
-      <ion-fab top right edge *ngIf="!menu" >
-          <button ion-fab mini color="light" *ngIf="!menu1"><ion-icon name="home"></ion-icon></button>
-          <button ion-fab mini color="primary" *ngIf="!menu4" (click)="goEditarPost(feed)" ><ion-icon name="create" ></ion-icon></button>
-          <ion-fab-list top right edge>
-            <button ion-fab color="dark" (click)="novoPost()" *ngIf="!menu2"><ion-icon name="add"></ion-icon></button>
-            <button ion-fab color="dark" (click)="goExibirPost(feed)" *ngIf="!menu3"><ion-icon name="paper"></ion-icon></button>
-            <button ion-fab color="dark" (click)="goEditarPost(feed)" *ngIf="!menu4"><ion-icon name="create"></ion-icon></button>
-          </ion-fab-list>
-        </ion-fab>
-      <!--fim menu-->
       <!--conteúdo-->
         <!--Post--> 
       <ion-content  *ngIf="!Post">
-          <ion-refresher (ionRefresh)="doRefresh($event)">
-              <ion-refresher-content
-                pullingIcon="arrow-dropdown"
-                pullingText="Atualizando..."
-                refreshingSpinner="circles"
-                refreshingText="Atualizando...">
-              </ion-refresher-content>
-          </ion-refresher>    
-        <ion-card *ngFor="let feed of feeds" > 
+        <ion-card *ngFor="let feed of feeds" class="cards" > 
+            <ion-fab right mini edge *ngIf="editandofeed">
+                <button ion-fab mini color="secondary" (click)="goEditarPost(feed)" ><ion-icon name="create" ></ion-icon></button>
+             </ion-fab>
             <ion-item>
                 <ion-avatar item-start>
-                  <img src="../../assets/imgs/6.jpg">
+                  <img src="../../assets/imgs/20171031_131231.jpg">
                   
                 </ion-avatar>
                 <h2>{{feed.titulo}}</h2>
                 <p>{{feed.atores}}</p>
-            </ion-item>         
-            <ion-card-header class="barratitulo" (click)="goPost()" text-center>
-              <ion-item class="slide-image2">
-                  <img [src]="feed.imagemPost" class="imagem4"/>
-              </ion-item>
-             <h2 class="estiloSlide1"> {{feed.descricao}} </h2>
+            </ion-item>    
+            <img [src]="feed.imagemPost" class="image2"/>     
+            <ion-card-header class="barratitulo" text-center>
+              <h2 class="estiloSlide1"> {{feed.descricao}} </h2>
             </ion-card-header>
              <ion-row class="barraFeed">
                   <ion-col *ngIf="editar">
@@ -96,8 +93,7 @@
                 </ion-row>
           </ion-card>
         </ion-content>
-        <!--Apresentação--> 
-       
+        <!--Apresentação-->        
           <ion-content *ngIf="apresentacao " class="tutorial-page">
               <ion-slides pager *ngIf="outrosSlides">
                 <ion-slide *ngFor="let slide of slides">

@@ -3,6 +3,7 @@ import { NavController, NavParams, ViewController, AlertController } from 'ionic
 import { Storage } from '@ionic/storage';
 import { FeedsProvider } from '../../providers/feeds/feeds';
 import { Camera, CameraOptions } from '@ionic-native/camera';
+import { MapaPage } from '../mapa/mapa';
 
 
 interface IFeed{
@@ -41,6 +42,7 @@ export class HomePage {
   menu2:boolean = true;
   menu3:boolean = true;
   menu4:boolean = true;
+  
 
   editandofeed:boolean = false;
   feedEditando:IFeed;
@@ -143,7 +145,7 @@ export class HomePage {
     this.outrosSlides = false;
     this.Post = false;
     this.apresentacao = false;
-    this.menu = false;
+    this.menu = true;
     this.menu1 = true;
     this.toolbar1 = false;
     this.menu2 = true;
@@ -203,8 +205,7 @@ export class HomePage {
       allowEdit: true,
       targetHeight: 100,
       targetWidth: 100,
-      cameraDirection : 1 && 0, // 0 BACK, 1 FRONT
-      
+
     }
     this.camera.getPicture(options).then((imageData) => {
       let base64Image = 'data:image/jpeg;base64,' + imageData;
@@ -233,16 +234,16 @@ export class HomePage {
     title: "Conheça o BlogLife",
     description: "Com esse <b class='estiloSlide2'>Aplicativo</b> é possível salvar suas melhores postagens e tirar fotos com auto padrão de qualidade.",
     image: "assets/imgs/blog2.jpg",
-  }, 
+  },
   { 
     title: "Como funciona?", 
     description: "Para <b class='estiloSlide2'>cadastrar uma postagem</b> é preciso clicar no menu, um botão no canto superior á direita.",
-    image: "assets/imgs/6.jpg",
+    image: "assets/imgs/20180119_113202.jpg",
   },
   {
     title: "Como faço para apagar um post?",
     description: "Para <b>deletar uma postagem</b> é preciso clicar no botão editar para habilitar a função remover.",
-    image: "assets/imgs/6.jpg",
+    image: "assets/imgs/20171031_131231.jpg",
   }
 ];
 verificando(){
@@ -258,12 +259,8 @@ verificando(){
     this.viewCtrl._didEnter();    
 }
 
-
-
-
-
-
-
-
+goMapa(){
+  this.navCtrl.push(MapaPage);
+}
 
  }
